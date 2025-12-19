@@ -1,16 +1,27 @@
 # mo_marketplace
 
-A new Flutter project.
+**mo_marketplace** is a Flutter-based mobile application built for cross-platform deployment on Android and iOS.
+
+---
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This repository contains the source code for the **mo_marketplace** Flutter application.  
+Follow the instructions below to set up the project and run it locally.
 
-A few resources to get you started if this is your first Flutter project:
+### Prerequisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Ensure the following tools are installed on your system:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter SDK (stable channel)  
+  https://docs.flutter.dev/get-started/install
+- Dart SDK (included with Flutter)
+- Android Studio or Visual Studio Code
+- Android SDK (for Android builds)
+- Xcode (for iOS builds – macOS only)
+- Android Emulator, iOS Simulator, or a physical device
+
+Confirm your Flutter environment is correctly configured:
+
+```bash
+flutter doctor
