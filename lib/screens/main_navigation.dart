@@ -46,11 +46,11 @@ class _MainNavigationState extends State<MainNavigation> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildNavItem(0, Icons.home_rounded, Icons.home_outlined, 'Home'),
-                _buildNavItem(1, Icons.grid_view_rounded, Icons.grid_view_outlined, 'Categories'),
+                Expanded(child: _buildNavItem(0, Icons.home_rounded, Icons.home_outlined, 'Home')),
+                Expanded(child: _buildNavItem(1, Icons.grid_view_rounded, Icons.grid_view_outlined, 'Categories')),
                 _buildAddButton(),
-                _buildNavItem(3, Icons.chat_bubble_rounded, Icons.chat_bubble_outline_rounded, 'Chat'),
-                _buildNavItem(4, Icons.person_rounded, Icons.person_outline_rounded, 'Profile'),
+                Expanded(child: _buildNavItem(3, Icons.chat_bubble_rounded, Icons.chat_bubble_outline_rounded, 'Chat')),
+                Expanded(child: _buildNavItem(4, Icons.person_rounded, Icons.person_outline_rounded, 'Profile')),
               ],
             ),
           ),
@@ -72,6 +72,7 @@ class _MainNavigationState extends State<MainNavigation> {
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               isActive ? activeIcon : inactiveIcon,

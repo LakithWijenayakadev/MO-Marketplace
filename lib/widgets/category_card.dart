@@ -31,7 +31,7 @@ class CategoryCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 85,
-        margin: const EdgeInsets.symmetric(horizontal: 6),
+        margin: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
