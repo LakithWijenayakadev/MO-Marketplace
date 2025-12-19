@@ -29,11 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // App Bar
             SliverToBoxAdapter(
               child: _buildAppBar(context),
             ),
-            // Search Bar
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 16),
@@ -44,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // Categories
             SliverToBoxAdapter(
               child: SectionHeader(
                 title: 'Categories',
@@ -82,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
             SliverToBoxAdapter(
               child: _buildTopProducts(context),
             ),
-            // Featured Products Grid
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(top: 16),
@@ -100,7 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // Products Grid
             SliverPadding(
               padding: const EdgeInsets.all(16),
               sliver: SliverGrid(
@@ -118,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // Bottom Padding
             const SliverToBoxAdapter(
               child: SizedBox(height: 20),
             ),
@@ -212,7 +206,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.shopping_cart_outlined,
                 badge: 2,
                 onTap: () {
-                  // Navigate to cart
                 },
               ),
             ],

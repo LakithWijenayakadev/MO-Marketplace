@@ -42,7 +42,7 @@ class _MainNavigationState extends State<MainNavigation> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -65,10 +65,10 @@ class _MainNavigationState extends State<MainNavigation> {
       onTap: () => setState(() => _currentIndex = index),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary.withOpacity(0.1) : Colors.transparent,
-          borderRadius: BorderRadius.circular(16),
+          // color: isActive ? AppColors.primary.withOpacity(0.1) : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -76,14 +76,16 @@ class _MainNavigationState extends State<MainNavigation> {
             Icon(
               isActive ? activeIcon : inactiveIcon,
               color: isActive ? AppColors.primary : AppColors.textLight,
-              size: 24,
+              size: 20,
             ),
             const SizedBox(height: 4),
             Text(
               label,
+              textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 color: isActive ? AppColors.primary : AppColors.textLight,
-                fontSize: 10,
+                fontSize: 8,
+              
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
               ),
             ),
@@ -97,15 +99,15 @@ class _MainNavigationState extends State<MainNavigation> {
     return GestureDetector(
       onTap: () => setState(() => _currentIndex = 2),
       child: Container(
-        width: 56,
-        height: 56,
+        width: 45,
+        height: 45,
         decoration: BoxDecoration(
           gradient: AppColors.primaryGradient,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
               color: AppColors.primary.withOpacity(0.4),
-              blurRadius: 12,
+              blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
