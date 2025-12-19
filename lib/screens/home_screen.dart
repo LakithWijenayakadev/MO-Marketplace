@@ -9,6 +9,8 @@ import '../widgets/search_bar_widget.dart';
 import '../widgets/section_header.dart';
 import '../widgets/app_drawer.dart';
 import 'product_list_screen.dart';
+import 'notification_screen.dart';
+import 'cart_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -198,7 +200,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.notifications_none_rounded,
                 badge: 3,
                 onTap: () {
-                  // Navigate to notifications
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationScreen(),
+                    ),
+                  );
                 },
               ),
               const SizedBox(width: 8),
@@ -206,6 +213,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.shopping_cart_outlined,
                 badge: 2,
                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CartScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -216,55 +229,62 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildIconButton(IconData icon, {int? badge, VoidCallback? onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Stack(
-        children: [
-          Container(
-            width: 42,
-            height: 42,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.06),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Icon(
+                icon,
+                color: AppColors.textPrimary,
+                size: 22,
+              ),
             ),
-            child: Icon(
-              icon,
-              color: AppColors.textPrimary,
-              size: 22,
-            ),
-          ),
-          if (badge != null && badge > 0)
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Container(
-                width: 18,
-                height: 18,
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 2),
-                ),
-                child: Center(
-                  child: Text(
-                    badge.toString(),
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
+            if (badge != null && badge > 0)
+              Positioned(
+                top: -4,
+                right: -4,
+                child: IgnorePointer(
+                  child: Container(
+                    width: 18,
+                    height: 18,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                    child: Center(
+                      child: Text(
+                        badge.toString(),
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
