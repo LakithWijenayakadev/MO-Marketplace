@@ -52,7 +52,13 @@ class CategoryCard extends StatelessWidget {
               ),
               child: Center(
                 child: icon is IconData
-                    ? Icon(icon, color: AppColors.textPrimary, size: 28)
+                    ? Builder(
+                        builder: (context) => Icon(
+                          icon,
+                          color: AppColors.getTextPrimaryColor(context),
+                          size: 28,
+                        ),
+                      )
                     : Text(
                         icon.toString(),
                         style: const TextStyle(fontSize: 28),
@@ -60,17 +66,19 @@ class CategoryCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Text(
-              name,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                fontSize: 11,
-                fontWeight: FontWeight.w500,
-                color: AppColors.textPrimary,
-                height: 1.2,
+            Builder(
+              builder: (context) => Text(
+                name,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.getTextPrimaryColor(context),
+                  height: 1.2,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

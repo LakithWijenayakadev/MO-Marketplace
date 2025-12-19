@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constants/colors.dart';
 import 'home_screen.dart';
 import 'product_list_screen.dart';
+import 'settings_screen.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -31,7 +32,7 @@ class _MainNavigationState extends State<MainNavigation> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.08),
@@ -61,36 +62,38 @@ class _MainNavigationState extends State<MainNavigation> {
 
   Widget _buildNavItem(int index, IconData activeIcon, IconData inactiveIcon, String label) {
     final isActive = _currentIndex == index;
-    return GestureDetector(
-      onTap: () => setState(() => _currentIndex = index),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-        decoration: BoxDecoration(
-          // color: isActive ? AppColors.primary.withOpacity(0.1) : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              isActive ? activeIcon : inactiveIcon,
-              color: isActive ? AppColors.primary : AppColors.textLight,
-              size: 20,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                color: isActive ? AppColors.primary : AppColors.textLight,
-                fontSize: 8,
-              
-                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+    return Builder(
+      builder: (context) => GestureDetector(
+        onTap: () => setState(() => _currentIndex = index),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+          decoration: BoxDecoration(
+            // color: isActive ? AppColors.primary.withOpacity(0.1) : Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                isActive ? activeIcon : inactiveIcon,
+                color: isActive ? AppColors.primary : AppColors.getTextLightColor(context),
+                size: 20,
               ),
-            ),
-          ],
+              const SizedBox(height: 4),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  color: isActive ? AppColors.primary : AppColors.getTextLightColor(context),
+                  fontSize: 8,
+              
+                  fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -130,14 +133,14 @@ class _AddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.getCardBackgroundColor(context),
         elevation: 0,
         title: Text(
           'Add Listing',
           style: GoogleFonts.poppins(
-            color: AppColors.textPrimary,
+            color: AppColors.getTextPrimaryColor(context),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -165,14 +168,14 @@ class _AddScreen extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: AppColors.getTextPrimaryColor(context),
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'Sell your items on MO Marketplace',
               style: GoogleFonts.poppins(
-                color: AppColors.textSecondary,
+                color: AppColors.getTextSecondaryColor(context),
               ),
             ),
             const SizedBox(height: 32),
@@ -206,14 +209,14 @@ class _ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.getCardBackgroundColor(context),
         elevation: 0,
         title: Text(
           'Messages',
           style: GoogleFonts.poppins(
-            color: AppColors.textPrimary,
+            color: AppColors.getTextPrimaryColor(context),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -241,14 +244,14 @@ class _ChatScreen extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: AppColors.getTextPrimaryColor(context),
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'Start chatting with sellers',
               style: GoogleFonts.poppins(
-                color: AppColors.textSecondary,
+                color: AppColors.getTextSecondaryColor(context),
               ),
             ),
           ],
@@ -264,7 +267,7 @@ class _ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.getBackgroundColor(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -351,7 +354,18 @@ class _ProfileScreen extends StatelessWidget {
               _buildMenuItem(Icons.shopping_bag_outlined, 'My Orders'),
               _buildMenuItem(Icons.location_on_outlined, 'Addresses'),
               _buildMenuItem(Icons.payment_outlined, 'Payment Methods'),
-              _buildMenuItem(Icons.settings_outlined, 'Settings'),
+              _buildMenuItem(
+                Icons.settings_outlined,
+                'Settings',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsScreen(),
+                    ),
+                  );
+                },
+              ),
               _buildMenuItem(Icons.help_outline, 'Help & Support'),
               _buildMenuItem(Icons.info_outline, 'About Us'),
             ],
@@ -361,25 +375,28 @@ class _ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String title) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: ListTile(
-        leading: Icon(icon, color: AppColors.textSecondary),
-        title: Text(
-          title,
-          style: GoogleFonts.poppins(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w500,
-          ),
+  Widget _buildMenuItem(IconData icon, String title, {VoidCallback? onTap}) {
+    return Builder(
+      builder: (context) => Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        decoration: BoxDecoration(
+          color: AppColors.getCardBackgroundColor(context),
+          borderRadius: BorderRadius.circular(12),
         ),
-        trailing: const Icon(
-          Icons.chevron_right,
-          color: AppColors.textLight,
+        child: ListTile(
+          leading: Icon(icon, color: AppColors.getTextSecondaryColor(context)),
+          title: Text(
+            title,
+            style: GoogleFonts.poppins(
+              color: AppColors.getTextPrimaryColor(context),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          trailing: Icon(
+            Icons.chevron_right,
+            color: AppColors.getTextLightColor(context),
+          ),
+          onTap: onTap,
         ),
       ),
     );

@@ -8,18 +8,18 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.getCardBackgroundColor(context),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_rounded, color: AppColors.getTextPrimaryColor(context)),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Notifications',
           style: GoogleFonts.poppins(
-            color: AppColors.textPrimary,
+            color: AppColors.getTextPrimaryColor(context),
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
@@ -98,86 +98,88 @@ class NotificationScreen extends StatelessWidget {
     required String time,
     required bool isRead,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: iconColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
+    return Builder(
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.getCardBackgroundColor(context),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-            child: Icon(
-              icon,
-              color: iconColor,
-              size: 24,
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: iconColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                icon,
+                color: iconColor,
+                size: 24,
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: isRead ? FontWeight.w500 : FontWeight.w600,
-                          color: AppColors.textPrimary,
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: isRead ? FontWeight.w500 : FontWeight.w600,
+                            color: AppColors.getTextPrimaryColor(context),
+                          ),
                         ),
                       ),
+                      if (!isRead)
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: const BoxDecoration(
+                            color: AppColors.primary,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    message,
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      color: AppColors.getTextSecondaryColor(context),
+                      height: 1.4,
                     ),
-                    if (!isRead)
-                      Container(
-                        width: 8,
-                        height: 8,
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  message,
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    color: AppColors.textSecondary,
-                    height: 1.4,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  time,
-                  style: GoogleFonts.poppins(
-                    fontSize: 11,
-                    color: AppColors.textLight,
+                  const SizedBox(height: 8),
+                  Text(
+                    time,
+                    style: GoogleFonts.poppins(
+                      fontSize: 11,
+                      color: AppColors.getTextLightColor(context),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

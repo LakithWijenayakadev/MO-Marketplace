@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.getBackgroundColor(context),
       drawer: const AppDrawer(),
       body: SafeArea(
         child: CustomScrollView(
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 42,
                   height: 42,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.getCardBackgroundColor(context),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
@@ -151,9 +151,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.menu_rounded,
-                    color: AppColors.textPrimary,
+                    color: AppColors.getTextPrimaryColor(context),
                     size: 22,
                   ),
                 ),
@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Welcome 👋',
                     style: GoogleFonts.poppins(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: AppColors.getTextSecondaryColor(context),
                     ),
                   ),
                   Row(
@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: GoogleFonts.poppins(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: AppColors.textPrimary,
+                          color: AppColors.getTextPrimaryColor(context),
                         ),
                       ),
                     ],
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 42,
               height: 42,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.getCardBackgroundColor(context),
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
@@ -253,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Icon(
                 icon,
-                color: AppColors.textPrimary,
+                color: AppColors.getTextPrimaryColor(context),
                 size: 22,
               ),
             ),

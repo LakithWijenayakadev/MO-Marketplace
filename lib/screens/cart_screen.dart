@@ -42,18 +42,18 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.getCardBackgroundColor(context),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_rounded, color: AppColors.getTextPrimaryColor(context)),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Shopping Cart',
           style: GoogleFonts.poppins(
-            color: AppColors.textPrimary,
+            color: AppColors.getTextPrimaryColor(context),
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
@@ -119,14 +119,14 @@ class _CartScreenState extends State<CartScreen> {
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: AppColors.getTextPrimaryColor(context),
             ),
           ),
           const SizedBox(height: 8),
           Text(
             'Add items to your cart to continue shopping',
             style: GoogleFonts.poppins(
-              color: AppColors.textSecondary,
+              color: AppColors.getTextSecondaryColor(context),
             ),
           ),
         ],
@@ -136,22 +136,23 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget _buildCartItem(Product product) {
     final quantity = _cartItems[product.id] ?? 1;
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
+    return Builder(
+      builder: (context) => Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: AppColors.getCardBackgroundColor(context),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
           Container(
             width: 80,
             height: 80,
@@ -165,7 +166,7 @@ class _CartScreenState extends State<CartScreen> {
                 product.image,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return const Icon(Icons.image, color: AppColors.textLight);
+                  return Icon(Icons.image, color: AppColors.getTextLightColor(context));
                 },
               ),
             ),
@@ -180,7 +181,7 @@ class _CartScreenState extends State<CartScreen> {
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
+                    color: AppColors.getTextPrimaryColor(context),
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -203,7 +204,7 @@ class _CartScreenState extends State<CartScreen> {
                           'Rs. ${product.originalPrice!.toStringAsFixed(2)}',
                           style: GoogleFonts.poppins(
                             fontSize: 12,
-                            color: AppColors.textLight,
+                            color: AppColors.getTextLightColor(context),
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
@@ -237,7 +238,7 @@ class _CartScreenState extends State<CartScreen> {
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textPrimary,
+                              color: AppColors.getTextPrimaryColor(context),
                             ),
                           ),
                           IconButton(
@@ -280,36 +281,38 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ],
       ),
+      ),
     );
   }
 
   Widget _buildCheckoutBar() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, -4),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Total',
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    color: AppColors.textSecondary,
+    return Builder(
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.getCardBackgroundColor(context),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 20,
+              offset: const Offset(0, -4),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Total',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      color: AppColors.getTextSecondaryColor(context),
+                    ),
                   ),
-                ),
                 Text(
                   'Rs. ${totalPrice.toStringAsFixed(2)}',
                   style: GoogleFonts.poppins(
@@ -343,6 +346,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );

@@ -11,16 +11,26 @@ class AppColors {
   static const Color accent = Color(0xFFFFB800);
   static const Color accentLight = Color(0xFFFFF8E1);
   
-  // Background Colors
+  // Light Mode Background Colors
   static const Color background = Color(0xFFF8F9FA);
   static const Color cardBackground = Colors.white;
   static const Color surfaceLight = Color(0xFFF5F5F5);
   
-  // Text Colors
+  // Dark Mode Background Colors
+  static const Color backgroundDark = Color(0xFF121212);
+  static const Color cardBackgroundDark = Color(0xFF1E1E1E);
+  static const Color surfaceLightDark = Color(0xFF2C2C2C);
+  
+  // Light Mode Text Colors
   static const Color textPrimary = Color(0xFF1A1A2E);
   static const Color textSecondary = Color(0xFF6B7280);
   static const Color textLight = Color(0xFF9CA3AF);
   static const Color textOnPrimary = Colors.white;
+  
+  // Dark Mode Text Colors
+  static const Color textPrimaryDark = Color(0xFFE5E5E5);
+  static const Color textSecondaryDark = Color(0xFFB0B0B0);
+  static const Color textLightDark = Color(0xFF808080);
   
   // Status Colors
   static const Color success = Color(0xFF10B981);
@@ -46,4 +56,35 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+  
+  // Helper methods to get colors based on theme
+  static Color getBackgroundColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? backgroundDark
+        : background;
+  }
+  
+  static Color getCardBackgroundColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? cardBackgroundDark
+        : cardBackground;
+  }
+  
+  static Color getTextPrimaryColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? textPrimaryDark
+        : textPrimary;
+  }
+  
+  static Color getTextSecondaryColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? textSecondaryDark
+        : textSecondary;
+  }
+  
+  static Color getTextLightColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? textLightDark
+        : textLight;
+  }
 }

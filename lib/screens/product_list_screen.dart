@@ -45,29 +45,29 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.getCardBackgroundColor(context),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_rounded, color: AppColors.getTextPrimaryColor(context)),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           widget.categoryFilter ?? 'All Products',
           style: GoogleFonts.poppins(
-            color: AppColors.textPrimary,
+            color: AppColors.getTextPrimaryColor(context),
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search_rounded, color: AppColors.textPrimary),
+            icon: Icon(Icons.search_rounded, color: AppColors.getTextPrimaryColor(context)),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.filter_list_rounded, color: AppColors.textPrimary),
+            icon: Icon(Icons.filter_list_rounded, color: AppColors.getTextPrimaryColor(context)),
             onPressed: () => _showFilterSheet(context),
           ),
         ],
@@ -78,7 +78,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.getCardBackgroundColor(context),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.04),
@@ -93,7 +93,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 Text(
                   '${filteredProducts.length} Products',
                   style: GoogleFonts.poppins(
-                    color: AppColors.textSecondary,
+                    color: AppColors.getTextSecondaryColor(context),
                     fontSize: 13,
                   ),
                 ),
@@ -104,7 +104,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       Text(
                         'Sort: ',
                         style: GoogleFonts.poppins(
-                          color: AppColors.textSecondary,
+                          color: AppColors.getTextSecondaryColor(context),
                           fontSize: 13,
                         ),
                       ),
@@ -166,7 +166,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: AppColors.getTextPrimaryColor(context),
                 ),
               ),
               const SizedBox(height: 16),
@@ -184,7 +184,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 title: Text(
                   option,
                   style: GoogleFonts.poppins(
-                    color: _sortBy == option ? AppColors.primary : AppColors.textPrimary,
+                    color: _sortBy == option ? AppColors.primary : AppColors.getTextPrimaryColor(context),
                     fontWeight: _sortBy == option ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
@@ -222,7 +222,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     style: GoogleFonts.poppins(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: AppColors.getTextPrimaryColor(context),
                     ),
                   ),
                   TextButton(
@@ -243,7 +243,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: AppColors.getTextPrimaryColor(context),
                 ),
               ),
               const SizedBox(height: 12),
@@ -261,7 +261,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: AppColors.getTextPrimaryColor(context),
                 ),
               ),
               const SizedBox(height: 12),

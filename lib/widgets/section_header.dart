@@ -30,7 +30,7 @@ class SectionHeader extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: AppColors.getTextPrimaryColor(context),
                 ),
               ),
               if (emoji != null) ...[

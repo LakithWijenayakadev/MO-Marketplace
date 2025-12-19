@@ -77,7 +77,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
               decoration: BoxDecoration(
                 color: _currentPage == index
                     ? AppColors.primary
-                    : AppColors.textLight.withOpacity(0.3),
+                    : AppColors.getTextLightColor(context).withOpacity(0.3),
                 borderRadius: BorderRadius.circular(4),
               ),
             ),

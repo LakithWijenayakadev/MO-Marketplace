@@ -20,10 +20,10 @@ class SearchBarWidget extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 16),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: AppColors.surfaceLight,
+          color: AppColors.getCardBackgroundColor(context),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: AppColors.textLight.withOpacity(0.2),
+            color: AppColors.getTextLightColor(context).withOpacity(0.2),
             width: 1,
           ),
         ),
@@ -31,7 +31,7 @@ class SearchBarWidget extends StatelessWidget {
           children: [
             Icon(
               Icons.search_rounded,
-              color: AppColors.textSecondary,
+              color: AppColors.getTextSecondaryColor(context),
               size: 22,
             ),
             const SizedBox(width: 12),
@@ -39,7 +39,7 @@ class SearchBarWidget extends StatelessWidget {
               child: Text(
                 hintText,
                 style: GoogleFonts.poppins(
-                  color: AppColors.textLight,
+                  color: AppColors.getTextLightColor(context),
                   fontSize: 14,
                 ),
               ),

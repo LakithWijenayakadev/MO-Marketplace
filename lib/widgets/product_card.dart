@@ -28,7 +28,7 @@ class ProductCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.getCardBackgroundColor(context),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -57,7 +57,9 @@ class ProductCard extends StatelessWidget {
                       width: double.infinity,
                       height: double.infinity,
                       placeholder: (context, url) => Container(
-                        color: AppColors.surfaceLight,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppColors.surfaceLightDark
+                            : AppColors.surfaceLight,
                         child: const Center(
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
@@ -66,10 +68,12 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                       errorWidget: (context, url, error) => Container(
-                        color: AppColors.surfaceLight,
-                        child: const Icon(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppColors.surfaceLightDark
+                            : AppColors.surfaceLight,
+                        child: Icon(
                           Icons.image_not_supported_outlined,
-                          color: AppColors.textLight,
+                          color: AppColors.getTextLightColor(context),
                         ),
                       ),
                     ),
@@ -115,10 +119,10 @@ class ProductCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.favorite_border,
                         size: 18,
-                        color: AppColors.textSecondary,
+                        color: AppColors.getTextSecondaryColor(context),
                       ),
                     ),
                   ),
@@ -140,7 +144,7 @@ class ProductCard extends StatelessWidget {
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
-                        color: AppColors.textPrimary,
+                        color: AppColors.getTextPrimaryColor(context),
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -159,7 +163,7 @@ class ProductCard extends StatelessWidget {
                           style: GoogleFonts.poppins(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.textSecondary,
+                            color: AppColors.getTextSecondaryColor(context),
                           ),
                         ),
                         const SizedBox(width: 4),
@@ -167,7 +171,7 @@ class ProductCard extends StatelessWidget {
                           '(${product.reviewCount})',
                           style: GoogleFonts.poppins(
                             fontSize: 10,
-                            color: AppColors.textLight,
+                            color: AppColors.getTextLightColor(context),
                           ),
                         ),
                       ],
@@ -188,7 +192,7 @@ class ProductCard extends StatelessWidget {
                           Text(
                             'Rs ${product.originalPrice!.toStringAsFixed(0)}',
                             style: GoogleFonts.poppins(
-                              color: AppColors.textLight,
+                              color: AppColors.getTextLightColor(context),
                               fontSize: 11,
                               decoration: TextDecoration.lineThrough,
                             ),
@@ -228,7 +232,7 @@ class ProductCardHorizontal extends StatelessWidget {
         width: 160,
         margin: const EdgeInsets.only(right: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.getCardBackgroundColor(context),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -255,12 +259,25 @@ class ProductCardHorizontal extends StatelessWidget {
                     height: 120,
                     placeholder: (context, url) => Container(
                       height: 120,
-                      color: AppColors.surfaceLight,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppColors.surfaceLightDark
+                          : AppColors.surfaceLight,
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.primary,
+                        ),
+                      ),
                     ),
                     errorWidget: (context, url, error) => Container(
                       height: 120,
-                      color: AppColors.surfaceLight,
-                      child: const Icon(Icons.image_not_supported),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppColors.surfaceLightDark
+                          : AppColors.surfaceLight,
+                      child: Icon(
+                        Icons.image_not_supported,
+                        color: AppColors.getTextLightColor(context),
+                      ),
                     ),
                   ),
                   if (product.discountPercent > 0)
@@ -300,6 +317,7 @@ class ProductCardHorizontal extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
+                      color: AppColors.getTextPrimaryColor(context),
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

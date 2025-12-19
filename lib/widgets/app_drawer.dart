@@ -20,7 +20,7 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.getCardBackgroundColor(context),
       width: MediaQuery.of(context).size.width * 0.85,
       child: Stack(
         children: [
@@ -191,12 +191,14 @@ class _AppDrawerState extends State<AppDrawer> {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppColors.surfaceLight,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppColors.surfaceLightDark
+                    : AppColors.surfaceLight,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.close_rounded,
-                color: AppColors.textPrimary,
+                color: AppColors.getTextPrimaryColor(context),
                 size: 20,
               ),
             ),
@@ -242,13 +244,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     style: GoogleFonts.poppins(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.textPrimary,
+                      color: AppColors.getTextPrimaryColor(context),
                     ),
                   ),
                 ),
                 Icon(
                   Icons.chevron_right_rounded,
-                  color: AppColors.textLight,
+                  color: AppColors.getTextLightColor(context),
                   size: 22,
                 ),
               ],
@@ -302,22 +304,26 @@ class _AppDrawerState extends State<AppDrawer> {
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: Text(
-                        title,
-                        style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.textPrimary,
+                      child: Builder(
+                        builder: (context) => Text(
+                          title,
+                          style: GoogleFonts.poppins(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.getTextPrimaryColor(context),
+                          ),
                         ),
                       ),
                     ),
                     AnimatedRotation(
                       turns: isExpanded ? 0.5 : 0,
                       duration: const Duration(milliseconds: 200),
-                      child: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: isExpanded ? AppColors.primary : AppColors.textLight,
-                        size: 24,
+                      child: Builder(
+                        builder: (context) => Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: isExpanded ? AppColors.primary : AppColors.getTextLightColor(context),
+                          size: 24,
+                        ),
                       ),
                     ),
                   ],
@@ -363,11 +369,13 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
               ),
               const SizedBox(width: 12),
-              Text(
-                title,
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  color: AppColors.textSecondary,
+              Builder(
+                builder: (context) => Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: AppColors.getTextSecondaryColor(context),
+                  ),
                 ),
               ),
             ],
@@ -415,20 +423,24 @@ class _AppDrawerState extends State<AppDrawer> {
             ],
           ),
           const SizedBox(height: 4),
-          Text(
-            "That's More like it",
-            style: GoogleFonts.poppins(
-              fontSize: 13,
-              color: AppColors.textSecondary,
-              fontStyle: FontStyle.italic,
+          Builder(
+            builder: (context) => Text(
+              "That's More like it",
+              style: GoogleFonts.poppins(
+                fontSize: 13,
+                color: AppColors.getTextSecondaryColor(context),
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            'v1.3.82+240',
-            style: GoogleFonts.poppins(
-              fontSize: 11,
-              color: AppColors.textLight,
+          Builder(
+            builder: (context) => Text(
+              'v1.3.82+240',
+              style: GoogleFonts.poppins(
+                fontSize: 11,
+                color: AppColors.getTextLightColor(context),
+              ),
             ),
           ),
         ],
